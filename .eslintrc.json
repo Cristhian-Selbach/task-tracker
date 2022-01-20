@@ -1,0 +1,18 @@
+{
+	"env": {
+		"browser": true
+	},
+	"extends": ["eslint:recommended", "plugin:vue/essential"],
+	"parserOptions": {
+		"ecmaVersion": 2021,
+		"sourceType": "module"
+	},
+	"plugins": ["vue"],
+	"rules": {
+		"linebreak-style": ["error", "unix"],
+		"quotes": ["error", "double"],
+		"semi": ["error", "always"],
+		"vue/multi-word-component-names": "off",
+		"vue/no-multiple-template-root": "off"
+	}
+}
