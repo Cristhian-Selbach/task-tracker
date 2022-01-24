@@ -1,7 +1,11 @@
 <template>
 	<header>
 		<h1>{{ title }}</h1>
-		<Button color="green" text="Add Task" />
+		<Button
+			@click.native="toggleAddTask"
+			color="green"
+			:text="showAddTask ? 'Close' : 'Add Task'"
+		/>
 	</header>
 </template>
 
@@ -11,9 +15,15 @@
 		name: "Header",
 		props: {
 			title: String,
+			showAddTask: Boolean,
 		},
 		components: {
 			Button,
+		},
+		methods: {
+			toggleAddTask() {
+				this.$emit("toggle-add-task");
+			},
 		},
 	};
 </script>

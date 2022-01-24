@@ -17,6 +17,9 @@
 	padding: 30px;
 	border-radius: 5px;
 }
+h3 {
+	font-size: 16px;
+}
 .btn {
 	display: inline-block;
 	background: #000;
@@ -35,7 +38,7 @@
 	outline: none;
 }
 .btn:active {
-	background-color: #e2e2e2 !important;
+	background-color: #ebebeb !important;
 	transform: scale(0.98);
 }
 .btn-block {
@@ -49,4 +52,13 @@
 .green:hover {
 	background-color: #fff;
 	color: #27ae60;
+}
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.2s ease-in;
+}
+.fade-enter-from,
+.fade-leave-to {
+	transition: opacity 0.1s ease-out;
+	opacity: 0;
 }

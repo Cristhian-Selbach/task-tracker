@@ -1,5 +1,5 @@
 <template>
-	<button :class="color" class="btn" @click="OnClick()">
+	<button :class="color" class="btn">
 		{{ text }}
 	</button>
 </template>
@@ -10,8 +10,6 @@
 			text: String,
 			color: String,
 		},
-		methods: {
-			onClick() {},
-		},
+		methods: {},
 	};
 </script>

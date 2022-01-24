@@ -1,0 +1,32 @@
+.task {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #ebebeb;
+	margin: 10px 0;
+	padding: 12px 20px;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: 0.3s ease-out;
+}
+.task:hover {
+	background: #e7e7e7;
+}
+.texts {
+	display: flex;
+	align-items: flex-start !important;
+	flex-direction: column;
+	padding: 0;
+	background-color: transparent;
+}
+.reminder {
+	border-left: 5px solid #27ae60;
+	transition: 0.1s;
+}
+.fas {
+	color: red;
+	transition: 0.2s ease;
+}
+.fas:hover {
+	color: #bb0000;
+}

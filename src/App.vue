@@ -1,22 +1,59 @@
 <template>
 	<div class="container">
-		<Header title="Task Tracker" />
-		<Tasks :tasks="tasks" />
+		<Header
+			:showAddTask="showAddTask"
+			@toggle-add-task="toggleAddTask"
+			title="Task Tracker"
+		/>
+		<transition name="fade">
+			<div v-if="showAddTask">
+				<AddTask @add-task="addTask" />
+			</div>
+		</transition>
+		<TasksList
+			@toggle-reminder="toggleReminder"
+			@delete-task="deleteTask"
+			:tasks="tasks"
+		/>
 	</div>
 </template>
 
 <script>
 	import Header from "./components/Header.vue";
-	import Tasks from "./components/Tasks.vue";
+	import TasksList from "./components/TasksList.vue";
+	import AddTask from "./components/AddTask.vue";
 	export default {
 		components: {
 			Header,
-			Tasks,
+			TasksList,
+			AddTask,
 		},
 		data() {
 			return {
 				tasks: [],
+				showAddTask: false,
 			};
+		},
+		methods: {
+			toggleAddTask() {
+				this.showAddTask = !this.showAddTask;
+			},
+			deleteTask(id) {
+				if (confirm("Are you sure?")) {
+					this.tasks = this.tasks.filter((task) => task.id !== id);
+				}
+			},
+			toggleReminder(id) {
+				this.tasks = this.tasks.map((task) => {
+					if (task.id === id) {
+						task.reminder = !task.reminder;
+					}
+					return task;
+				});
+			},
+			addTask(task) {
+				this.tasks.push(task);
+			},
 		},
 		created() {
 			this.tasks = [
@@ -43,4 +80,4 @@
 	};
 </script>
 
-<style src="./styles/AppStyle.css"></style>
+<style src="./styles/GlobalStyle.css"></style>
