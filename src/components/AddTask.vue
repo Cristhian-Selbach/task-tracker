@@ -46,7 +46,6 @@
 			},
 			createTask() {
 				const newTask = {
-					id: Math.floor(Math.random() * 10000),
 					title: this.title,
 					day: this.day,
 					reminder: this.reminder,
@@ -55,7 +54,7 @@
 			},
 			clearFields() {
 				this.id = "";
-				this.text = "";
+				this.title = "";
 				this.day = "";
 				this.reminder = false;
 			},

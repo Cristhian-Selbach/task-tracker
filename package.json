@@ -5,9 +5,12 @@
     "build": "vite build",
     "lint": "vue-cli-service lint",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "backend": "json-server --watch db.json --port 5000"
   },
   "dependencies": {
+    "json-server": "^0.17.0",
+    "vite-plugin-proxy": "^0.5.0",
     "vue": "^3.2.25"
   },
   "devDependencies": {

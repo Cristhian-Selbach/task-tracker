@@ -35,15 +35,46 @@
 			};
 		},
 		methods: {
-			toggleAddTask() {
-				this.showAddTask = !this.showAddTask;
+			async addTask(task) {
+				const res = await fetch("http://localhost:5000/tasks", {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json",
+					},
+					body: JSON.stringify(task),
+				});
+
+				const data = await res.json();
+				this.tasks.push(data);
 			},
-			deleteTask(id) {
+			async deleteTask(id) {
 				if (confirm("Are you sure?")) {
+					await fetch("http://localhost:5000/tasks/" + id, {
+						method: "DELETE",
+					});
 					this.tasks = this.tasks.filter((task) => task.id !== id);
 				}
 			},
-			toggleReminder(id) {
+			toggleAddTask() {
+				this.showAddTask = !this.showAddTask;
+			},
+			async toggleReminder(id) {
+				const taskToToggle = await this.fetchTask(id);
+				const updTask = {
+					...taskToToggle,
+					reminder: !taskToToggle.reminder,
+				};
+
+				await fetch("http://localhost:5000/tasks/" + id, {
+					method: "PUT",
+					headers: {
+						"Content-type": "application/json",
+					},
+					body: JSON.stringify(updTask),
+				});
+
+				console.log(taskToToggle);
+
 				this.tasks = this.tasks.map((task) => {
 					if (task.id === id) {
 						task.reminder = !task.reminder;
@@ -51,31 +82,19 @@
 					return task;
 				});
 			},
-			addTask(task) {
-				this.tasks.push(task);
+			async fetchTasks() {
+				const res = await fetch("http://localhost:5000/tasks");
+				const data = await res.json();
+				return data;
+			},
+			async fetchTask(id) {
+				const res = await fetch("http://localhost:5000/tasks/" + id);
+				const data = await res.json();
+				return data;
 			},
 		},
-		created() {
-			this.tasks = [
-				{
-					id: 1,
-					title: "Doctor Appointment",
-					day: "March 1st at 2:30pm",
-					reminder: true,
-				},
-				{
-					id: 2,
-					title: "Meeting at School",
-					day: "March 3rd at 9:00am",
-					reminder: true,
-				},
-				{
-					id: 3,
-					title: "Food Shopping",
-					day: "March 3rd at 4:30pm",
-					reminder: true,
-				},
-			];
+		async created() {
+			this.tasks = await this.fetchTasks();
 		},
 	};
 </script>
