@@ -1,11 +1,14 @@
 <template>
 	<header>
 		<h1>{{ title }}</h1>
-		<Button
-			@click.native="toggleAddTask"
-			color="green"
-			:text="showAddTask ? 'Close' : 'Add Task'"
-		/>
+		<transition name="fade">
+			<Button
+				v-if="homePage"
+				@click.native="toggleAddTask"
+				color="green"
+				:text="showAddTask ? 'Close' : 'Add Task'"
+			/>
+		</transition>
 	</header>
 </template>
 
@@ -19,6 +22,11 @@
 		},
 		components: {
 			Button,
+		},
+		computed: {
+			homePage() {
+				return this.$route.path === "/" ? true : false;
+			},
 		},
 		methods: {
 			toggleAddTask() {
